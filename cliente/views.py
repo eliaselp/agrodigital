@@ -231,13 +231,13 @@ class Registro(View):
                     "Alerta":"Todos los campos son obligatorios",
                     "back":request.POST
                 })
-            if Solo_letras_numeros(username):
+            if not Solo_letras_numeros(username):
                 return render(request,"cliente/demo1.html",{
                     "productos":list(models_admin.Producto.objects.all()),
                     "Alerta":"El nombre de usuario solo admite letras y numeros",
                     "back":request.POST
                 })
-            if formato_correo(email):
+            if not formato_correo(email):
                 return render(request,"cliente/demo1.html",{
                     "productos":list(models_admin.Producto.objects.all()),
                     "Alerta":"El formato del correo es incorrecto",
