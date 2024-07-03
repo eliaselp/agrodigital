@@ -1,0 +1,94 @@
+{% extends "cliente/base.html" %}
+{% load static %}
+
+{% block contenido %}
+<main class="main cart">
+    <div class="page-content pt-7 pb-10">
+        <div class="container mt-7 mb-2">
+            <div class="accordion" id="accordionExample">
+                {% if compras %}
+                    {% for cc in compras %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#compra{{cc.compra.id}}" aria-expanded="false"
+                                    aria-controls="collapseOne">
+                                    {% if cc.compra.pendiente %}
+                                        <span
+                                            class="product-label label-sale"
+                                            style="margin-right: 30px;">Pediente
+                                        </span>
+                                    {% else %}
+                                        <label class="product-label label-new">Entregado</label>
+                                    {% endif %}
+                                    <p class="fs-4 my-auto">{{cc.compra.fecha}}</p>
+                                </button>
+                            </h2>
+                            <div id="compra{{cc.compra.id}}"
+                                class="accordion-collapse collapse show"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="table-responsive">
+                                        <table class="shop-table cart-table py-4">
+                                            <thead>
+                                                <tr>
+                                                    <th class="px-4"><span>Foto</span></th>
+                                                    <th class="px-4">Producto</th>
+                                                    <th class="px-4"><span>Precio</span></th>
+                                                    <th class="px-4"><span>Cantiad</span></th>
+                                                    <th class="px-4"><span>Subtotal</span></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                {% for prc in cc.detalles %}
+                                                <tr>
+                                                    <td class="product-thumbnail px-4 py-4">
+                                                        <figure>
+                                                            <a>
+                                                                <img
+                                                                    src="{{prc.detalle.productoid.urlimagen}}"
+                                                                    width="100"
+                                                                    height="100"
+                                                                    alt="product">
+                                                            </a>
+                                                        </figure>
+                                                    </td>
+                                                    <td
+                                                        class="product-name px-4 py-4">
+                                                        <div
+                                                            class="product-name-section">
+                                                            <a>{{prc.detalle.productoid.nombre}}</a>
+                                                        </div>
+                                                    </td>
+                                                    <td
+                                                        class="product-subtotal px-4 py-4">
+                                                        <span class="amount">${{prc.detalle.productoid.precio}}</span>
+                                                    </td>
+                                                    <td
+                                                        class="product-subtotal px-4 py-4">
+                                                        <span
+                                                            class="amount">{{prc.detalle.cantidad}}</span>
+                                                    </td>
+
+                                                    <td
+                                                        class="product-subtotal px-4 py-4">
+                                                        <span
+                                                            class="amount">${{prc.subtotal}}</span>
+                                                    </td>
+
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    {% endblock %}

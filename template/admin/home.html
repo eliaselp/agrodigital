@@ -1,0 +1,18 @@
+{% extends "admin/index.html" %}
+{% block contenido %}
+    <h2 data-wow-duration="700ms" data-wow-delay="500ms" class="wow bounceInDown animated">
+        Bienvenido<span> </span>
+    !</h2>
+    <h3 data-wow-duration="1000ms" class="wow slideInLeft animated">
+        <span id="userName" class="texto-pequeno">
+           Administrador {{request.user}}
+        </span>
+    </h3> 
+    <span data-wow-duration="1000ms" class="wow slideInRight animated">
+        Es hora de trabajar
+    </span>
+    <a href="../../../../../../" class="primary-btn mt-4" data-text="Agromercado">
+        <span>P</span> <span>á</span> <span>g</span> <span> i</span> <span>n</span> <span>a</span>
+        <span>C</span> <span>l</span> <span>i</span> <span>e</span> <span>n</span><span>t</span><span>e</span>
+    </a>
+{% endblock  %}

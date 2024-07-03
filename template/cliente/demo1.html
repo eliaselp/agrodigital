@@ -1,0 +1,648 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from d-themes.com/html/riode/demo1.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 05 Jan 2024 21:46:59 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Agro - Digital</title>
+    <link rel="icon" type="image/png" href="{% static 'img/cliente/icons/favicon.png' %}">
+    <link rel="preload" href="{% static 'vendor/fontawesome-free/webfonts/fa-solid-900.woff2' %}" as="font" type="font/woff2">
+    <link rel="preload" href="{% static 'vendor/fontawesome-free/webfonts/fa-brands-400.woff2' %}" as="font" type="font/woff2">
+    <script>
+        WebFontConfig = {
+            google: { families: ['Poppins:300,400,500,600,700,800'] }
+        };
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
+            wf.src = 'js/webfont.js';
+            wf.async = true;
+            s.parentNode.insertBefore(wf, s);
+        })(document);
+    </script>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/magnific-popup/magnific-popup.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/owl-carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/sticky-icon/stickyicon.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cliente/demo1.min.css' %}">
+</head>
+
+<body class="home">
+    <div class="page-wrapper">
+        <h1 class="d-none">Huerto Digital</h1>
+        <header class="header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <p class="welcome-msg">Bienvenido a Agro-Digital</p>
+                    </div>
+                    {% if not request.user.is_authenticated %}
+                        <div class="header-right">
+                            <span class="divider"></span>
+                            <a href="#signin" class="login-toggle link-to-tab d-show">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                </svg>
+                                Autenticar
+                            </a>
+                            <span class="delimiter">/</span>
+                            <a href="#register" class="register-toggle link-to-tab d-show ml-2">Registrar</a>
+                            <div class="dropdown login-dropdown off-canvas">
+                                <div class="canvas-overlay"></div>
+
+                                <div class="dropdown-box scrollable">
+                                    <div class="login-popup">
+                                        <div class="form-box">
+                                            <div class="tab tab-nav-simple tab-nav-boxed form-tab">
+                                                <ul class="nav nav-tabs nav-fill align-items-center border-no justify-content-center mb-5"
+                                                    role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active border-no lh-1 ls-normal"
+                                                            href="#signin">Autenticar</a>
+                                                    </li>
+                                                    <li class="delimiter">o</li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link border-no lh-1 ls-normal"
+                                                            href="#register">Registrar</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="signin">
+                                                        <form action="../../../../login/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="form-group mb-3">
+                                                                <input name="email" type="email" class="form-control" id="singin-email"
+                                                                    placeholder="Correo"
+                                                                    value="{{back.email}}"
+                                                                    required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input name="password" type="password" class="form-control"
+                                                                    id="singin-password" value="{{back.password}}"
+                                                                    placeholder="Contraseña" required>
+                                                            </div>
+                                                            <button class="btn btn-dark btn-block btn-rounded"
+                                                                type="submit">Autenticar
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="tab-pane" id="register">
+                                                        <form action="../../../../../registrar/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="form-group mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    name="username" value="{{back.username}}"
+                                                                    placeholder="Nombre de Usuario" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <input type="text" class="form-control" id="singin-email"
+                                                                    name="email" value="{{back.email}}"
+                                                                    placeholder=" Correo " required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <input type="text" class="form-control"
+                                                                    name="direccion" value="{{back.direccion}}"
+                                                                    placeholder="Direccion Particular" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control"
+                                                                    name="password1" value="{{back.password1}}"
+                                                                    placeholder="Contraseña " required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control"
+                                                                    name="password2" value="{{back.password2}}"
+                                                                    placeholder="Repetir Contraseña" required>
+                                                            </div>
+                                                        
+                                                            <div class="form-footer">
+                                                                <div class="form-checkbox">
+                                                                    <input type="checkbox" class="custom-checkbox"
+                                                                        id="register-agree" name="register-agree" required>
+                                                                    <label class="form-control-label" for="register-agree">
+                                                                        Agregar política de seguridad</label>
+                                                                </div>
+                                                            </div>
+                                                            <button class="btn btn-dark btn-block btn-rounded"
+                                                                type="submit">Registrar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button title="Close (Esc)" type="button" class="mfp-close"><span>×</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="header-right">
+                            <span class="divider"></span>
+                            <a class="link-to-tab d-show" {% if not request.user.is_staff %}href="../../../../../../perfil/"{% endif %} >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                </svg>
+                                {{request.user}}
+                            </a>
+                            <span class="delimiter">/</span>
+                            <a href="../../../../logout/" class="link-to-tab d-show ml-2">Cerrar Sesión</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="header-middle sticky-header fix-top sticky-content">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="#" class="mobile-menu-toggle">
+                            <i >&#x2630;</i>
+                        </a>
+                        <a href="../../../../../../../../" class="logo">
+                            <img src="{% static 'img/cliente/logo-footer.png' %}" alt="logo" width="153" height="44" />
+                        </a>
+                        <div class="header-search hs-simple">
+                            <form action="../../../../../../../../../../../../../../../../" class="input-wrapper" method="POST">
+                                {% csrf_token %}
+                                <input type="text" class="form-control" name="buscar" autocomplete="off"
+                                    placeholder="Buscar producto..." required />
+                                <button class="btn btn-search" type="submit" title="submit-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <a href="tel:+5352036098" class="icon-box icon-box-side">
+                            <div class="icon-box-icon mr-0 mr-lg-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-telephone" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+                                </svg>
+                            </div>
+                            <div class="icon-box-content d-lg-show">
+                                <h4 class="icon-box-title">LLamanos:</h4>
+                                <p>(+53) 52036098</p>
+                            </div>
+                        </a>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        <span class="divider"></span>
+                        <!-- BOTON DEL CARRITO -->
+                        <div class="dropdown cart-dropdown type2 off-canvas mr-0 mr-lg-2">
+                            <a href="#" class="cart-toggle label-block link">
+                                {% if not request.user.is_staff %}
+                                    <div class="cart-label d-lg-show">
+                                        <span class="cart-name">Carrito:</span>
+                                        <span class="cart-price">${{total_monto}}</span>
+                                    </div>
+                                    <div class="icon-box-icon mr-0 mr-lg-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-bag" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                                        </svg>
+                                        {% if tamanio_carrito %}
+                                            <span class="cart-count">{{tamanio_carrito}}</span>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </a>
+                            <div class="canvas-overlay"></div>
+                            <div class="dropdown-box">
+                                <div class="canvas-header">
+                                    <h4 class="canvas-title">Carrito</h4>
+                                    <a href="#" class="btn btn-dark btn-link btn-icon-right btn-close">
+                                        Cerrar
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                            class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                                            <path fill-rule="evenodd"
+                                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                                        </svg>
+                                        <span class="sr-only">Carro</span>
+                                    </a>
+                                </div>
+                                <div class="products scrollable">
+                                    <!-- Carta de producto-->
+                                    {% if carrito %}
+                                        {% for cp in carrito %}
+                                            <div class="product product-cart">
+                                                <figure class="product-media">
+                                                    <a>
+                                                        <img src="{{cp.carrito.productoid.urlimagen}}" alt="product"
+                                                            width="80" height="88" />
+                                                    </a>
+                                                    <a class="btn btn-link btn-close" href="../../../../../eliminar_carrito/{{cp.carrito.id}}" style="height:20px; width:20px;">
+                                                        <i class="fas fa-times"></i><span class="sr-only">Cerrar</span>
+                                                    </a>
+
+                                                </figure>
+                                                <div class="product-detail">
+                                                    <a href="product.html" class="product-name">{{cp.carrito.productoid.nombre}}</a>
+                                                    <div class="price-box">
+                                                        <span class="product-quantity">{{cp.carrito.cantidad}}</span>
+                                                        <span class="product-price">${{cp.carrito.productoid.precio}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="cart-total">
+                                            <label>Total:</label>
+                                            <span class="price">${{total_monto}}</span>
+                                        </div>
+                                        <div class="cart-action">
+                                            <a href="../../../../../../../../efectuar_compra/" class="btn btn-dark"><span>Comparar</span></a>
+                                        </div>
+                                    {% else %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
+    <div class="header-bottom d-lg-show">
+        <div class="container">
+            <div class="header-left">
+                <nav class="main-nav">
+                    <ul class="menu">
+                        <li class="active">
+                            <a href="../../../../../../../../../">Principal</a>
+                        </li>
+                        <li>
+                            <!--Contacto-->
+                            <a href="../../../../../../../contacto/" class="contact d-lg-show"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"/>
+                                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                            </svg>Contactanos</a>
+                        </li>
+                        <li>
+                            <!--dROPDOWN DE CATEGORIAS-->
+                            <a href="#">Categoría</a>
+                            <div class="megamenu">
+                                <div class="row">
+                                    <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+                                        <h4 class="menu-title">Productos</h4>
+                                        <ul>
+                                            <li><a href="../../../../../../../categoria/Fruta/">Fruta</a></li>
+                                            <li><a href="../../../../../../../categoria/Verdura/">Verdura</a></li>
+                                            <li><a href="../../../../../../../categoria/Sazones/">Sazones</a></li>
+                                            <li><a href="../../../../../../../categoria/Hortaliza/">Hortaliza </a></li>
+                                            <li><a href="../../../../../../../categoria/Legumbre/">Legumbre</a></li>
+                                            <li><a href="../../../../../../../categoria/Cereal/">Cereal </a></li>
+                                            <li><a href="../../../../../../../categoria/Lacteos/">Lácteos </a></li>
+                                            <li><a href="../../../../../../../categoria/Carnicos/">Cárnicos</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li>
+                                <a href="../../../../../../../../../compras/">Compras</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    </header>
+
+    <main class="main">
+        <div class="page-content">
+            <section class="intro-section">
+                <div class="owl-carousel owl-theme row owl-dot-inner owl-dot-white intro-slider animation-slider cols-1 gutter-no"
+                    data-owl-options="{
+                        'nav': false,
+                        'dots': true,
+                        'loop': false,
+                        'items': 1,
+                        'autoplay': false,
+                        'autoplayTimeout': 8000
+                    }">
+                    <div class="banner banner-fixed intro-slide1" style="background-color: #46b2e8;">
+                        <figure>
+                            <img src="{% static 'img/cliente/demos/demo1/slides/slide1.jpg' %}" alt="intro-banner"
+                                width="1903" height="630" style="background-color: #34ace5;" />
+                        </figure>
+                        <div class="container">
+                            <div class="banner-content y-50">
+                                <h4 class="banner-subtitle font-weight-bold ls-l">
+                                    <span class="d-inline-block slide-animate text-white "
+                                        data-animation-options="{'name': 'fadeInRightShorter', 'duration': '1s', 'delay': '.2s'}">Compre ahora</span>
+                                    <span class="d-inline-block label-star bg-white text-primary slide-animate"
+                                        data-animation-options="{'name': 'fadeInRightShorter', 'duration': '1s', 'delay': '.4s'}">10% de descuento</span>
+                                </h4>
+                                <h2 class="banner-title font-weight-bold text-white lh-1 ls-md slide-animate"
+                                    data-animation-options="{'name': 'fadeInUpShorter', 'duration': '1.2s', 'delay': '1s'}">
+                                    Agro-Digital</h2>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="container mt-6 appear-animate">
+                    <div class="service-list">
+                        <div class="owl-carousel owl-theme row cols-lg-3 cols-sm-2 cols-1" data-owl-options="{
+                                    'items': 3,
+                                    'nav': false,
+                                    'dots': false,
+                                    'loop': true,
+                                    'autoplay': false,
+                                    'autoplayTimeout': 5000,
+                                    'responsive': {
+                                        '0': {
+                                            'items': 1
+                                        },
+                                        '576': {
+                                            'items': 2
+                                        },
+                                        '768': {
+                                            'items': 3,
+                                            'loop': false
+                                        }
+                                    }
+                                }">
+                            <div class="icon-box icon-box-side icon-box1 appear-animate" data-animation-options="{
+                                        'name': 'fadeInRightShorter',
+                                        'delay': '.3s'
+                                    }">
+
+                                <div class="icon-box-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-truck" viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                                    </svg>
+                                </div>
+                                <div class="icon-box-content">
+                                    <h4 class="icon-box-title text-capitalize ls-normal lh-1">Envío y gratis
+                                    </h4>
+                                    <p class="ls-s lh-1">
+                                        Envío gratuito en pedidos superiores a $99</p>
+                                </div>
+                            </div>
+                            <div class="icon-box icon-box-side icon-box2 appear-animate" data-animation-options="{
+                                        'name': 'fadeInRightShorter',
+                                        'delay': '.4s'
+                                    }">
+                                    <div class="icon-box-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                        </svg>
+                                    </div>
+                                <div class="icon-box-content">
+                                    <h4 class="icon-box-title text-capitalize ls-normal lh-1">Atención al cliente 24/7
+                                    </h4>
+                                    <p class="ls-s lh-1">Acceso instantáneo a un soporte perfecto</p>
+                                </div>
+                            </div>
+                            <div class="icon-box icon-box-side icon-box3 appear-animate" data-animation-options="{
+                                        'name': 'fadeInRightShorter',
+                                        'delay': '.5s'
+                                    }">
+                                    <div class="icon-box-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-lock-fill" viewBox="0 0 16 16">
+                                            <path d="M7 7a1 1 0 0 1 2 0v1H7zM6 9.3c0-.042.02-.107.105-.175A.64.64 0 0 1 6.5 9h3a.64.64 0 0 1 .395.125c.085.068.105.133.105.175v2.4c0 .042-.02.107-.105.175A.64.64 0 0 1 9.5 12h-3a.64.64 0 0 1-.395-.125C6.02 11.807 6 11.742 6 11.7z"/>
+                                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M10 7v1.076c.54.166 1 .597 1 1.224v2.4c0 .816-.781 1.3-1.5 1.3h-3c-.719 0-1.5-.484-1.5-1.3V9.3c0-.627.46-1.058 1-1.224V7a2 2 0 1 1 4 0"/>
+                                        </svg>
+                                    </div>
+                                <div class="icon-box-content">
+                                    <h4 class="icon-box-title text-capitalize ls-normal lh-1">Pago 100% Seguro
+                                    </h4>
+                                    <p class="ls-s lh-1">¡Aseguramos el pago seguro!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="product-wrapper container appear-animate mt-6 mt-md-10 pt-4 pb-8" data-animation-options="{
+                    'delay': '.3s'
+                }">
+                <h2 class="title title-center mb-5">Nuestros Productos</h2>
+                {% if not productos %}
+                    <div class="w-100 my-5">
+                        <h3 class="title title-center my-5">No hay productos Disponibles</h3>
+                    </div>
+                {% endif %}
+                <div class="owl-carousel owl-theme row owl-nav-full cols-2 cols-md-3 cols-lg-4" data-owl-options="{
+                        'items': 5,
+                        'nav': false,
+                        'loop': false,
+                        'dots': true,
+                        'margin': 20,
+                        'responsive': {
+                            '0': {
+                                'items': 2
+                            },
+                            '768': {
+                                'items': 3
+                            },
+                            '992': {
+                                'items': 4,
+                                'dots': false,
+                                'nav': true
+                            }
+                        }
+                    }">
+                    
+                    {% for prd in productos %}
+                        <div class="product text-center">
+                            <figure class="product-media">
+                                <img src="{{prd.urlimagen}}"
+                                    alt="Blue Pinafore Denim Dress" width="280" height="315"
+                                    style="background-color: #f2f3f5;" />
+                                </a>
+                                {% if prd.cantidad > 0 %}
+                                    <div class="product-label-group">
+                                        <label class="product-label label-new">Disponible</label>
+                                    </div>
+                                {% else %}
+                                    <div class="product-label-group">
+                                        <span class="product-label label-sale">No disponible</span>
+                                    </div>
+                                {% endif %}
+                                {% if prd.cantidad > 0 %}
+                                    <div class="product-action-vertical">
+                                        <a href="../../../../../../agregar_carrito/{{prd.id}}/" data-toggle="modal" data-target="#addCartModal"
+                                            title="Add to cart">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                                class="bi bi-bag" viewBox="0 0 16 16">
+                                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </figure>
+                            <div class="product-details">
+                                <div class="product-cat">
+                                    <a href="shop-grid-3cols.html">{{prd.tipo}}</a>
+                                </div>
+                                <h3 class="product-name">
+                                    <a href="product.html">{{prd.nombre}}</a>
+                                </h3>
+                                <div class="product-price">
+                                    <span class="price">${{prd.precio}}</span>
+                                </div>
+                                <div class="ratings-container">
+                                    <div class="ratings-full" style="display: none;">
+                                        <span class="ratings" style="width:100%"></span>
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <a href="../../../../../../../../" class="logo-footer">
+                            <img src="{% static 'img/cliente/logo-footer.png' %}" alt="logo-footer" width="154"
+                                height="43" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-middle">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="widget widget-info">
+                            <h4 class="widget-title">Información de contacto</h4>
+                            <ul class="widget-body">
+                                <li>
+                                    <label>Teléfono:</label>
+                                    <a href="tel:#">Línea Gratuita(+53) 52036098 </a>
+                                </li>
+                                <li>
+                                    <label>Correo: giandygm@estudiantes.uci.cu</label>
+                                    <a
+                                        href="https://d-themes.com/cdn-cgi/l/email-protection#0b666a62674b7962646f6e25686466"><span
+                                            class="__cf_email__"
+                                            data-cfemail="d6bbb7bfba96a4bfb9b2b3f8b5b9bb">[email&#160;protected]</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <label>Dirección:</label>
+                                    <a href="#">123 Street Name, City, Cuba</a>
+                                </li>
+                                <li>
+                                    <label>Día de trabajo / horas:</label>
+                                </li>
+                                <li>
+                                    <a href="#">Lunes - Domingo / 9:00 AM - 8:00 PM</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-left">
+
+                </div>
+                <div class="footer-center">
+                    <p class="copyright">Agro-Digital &copy; 2024. Reservados todos los derechos</p>
+                </div>
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="#" title="social-link" class="social-link social-facebook fab fa-facebook-f"></a>
+                        <a href="#" title="social-link" class="social-link social-twitter fab fa-twitter"></a>
+                        <a href="#" title="social-link" class="social-link social-linkedin fab fa-linkedin-in"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+
+    <a id="scroll-top" href="#top" title="Top" role="button" class="scroll-top"><svg xmlns="http://www.w3.org/2000/svg"
+            width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+        </svg></a>
+
+    <div class="mobile-menu-wrapper">
+        <div class="mobile-menu-overlay"></div>
+        <a class="mobile-menu-close" href="#"><i >X</i></a>
+        <div class="mobile-menu-container scrollable">
+            
+
+            <ul class="mobile-menu mmenu-anim">
+                <li>
+                    <a href="../../../../../../../../../">Principal</a>
+                </li>
+                <li>
+                    <a href="../../../../../../../contacto/">Contáctanos</a>
+                </li>
+                <li>
+                    <a href="#">Categorías</a>
+                    <ul>
+                        <li>  
+                            <li><a href="../../../../../../../categoria/Fruta/">Fruta</a></li>
+                            <li><a href="../../../../../../../categoria/Verdura/">Verdura</a></li>
+                            <li><a href="../../../../../../../categoria/Sazones/">Sazones</a></li>
+                            <li><a href="../../../../../../../categoria/Hortaliza/">Hortaliza </a></li>
+                            <li><a href="../../../../../../../categoria/Legumbre/">Legumbre</a></li>
+                            <li><a href="../../../../../../../categoria/Cereal/">Cereal </a></li>
+                            <li><a href="../../../../../../../categoria/Lacteos/">Lácteos </a></li>
+                            <li><a href="../../../../../../../categoria/Carnicos/">Cárnicos</a></li>                                
+                        </li>
+                    </ul>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a href="../../../../../../../../../compras/">Compras</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/parallax/parallax.min.js' %}"></script>
+    <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendor/elevatezoom/jquery.elevatezoom.min.js' %}"></script>
+    <script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'vendor/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/cliente/main.min.js' %}"></script>
+    <script>
+        {% if Alerta %}
+            alert("{{Alerta}}")
+        {% endif %}
+    </script>
+</body>
+
+</html>

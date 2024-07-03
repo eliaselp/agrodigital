@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html> 
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>Business Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/cliente/icons/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+
+<body id="body">
+    <header id="navigation" class="fixed-top navbar navbar-expand-lg">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1 id="logo" class="fs-3 fw-bold " style="color: #ffa631;">Agro-Digital</h1>
+            </div>            
+            <div class="user-info">
+                <div id="userLogo" class="logo"></div>
+            </div>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+                data-bs-target=".navbar-collapse">
+                <span class="visually-hidden">Toggle navigation</span> 
+                <i class="fa fa-bars fa-lg">&#x2630;</i>
+            </button>
+            <nav class="collapse navbar-collapse justify-content-end">
+                <ul id="nav" class="navbar-nav">                    
+                    <li class="nav-item dropdown">
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: 5px;">
+                                Trabajo
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                <li><a class='dropdown-item external' href='../../../admin/'>Principal</a></li>
+                                <li><a class='dropdown-item external' href='../../../admin/mercancias/'>Mercancía</a></li>
+                                <li><a class='dropdown-item external' href='../../../../admin/exportar_inventario/'>Exportar Inventario</a></li>
+                                <li><a class='dropdown-item external' href='../../../../admin/gestion_usuarios/'>Lista Usuario</a></li>
+                                <li><a class='dropdown-item external' href='../../../../../admin/reportes/'>Generar Reporte</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end transition" aria-labelledby="navbarDropdown2">
+                            <li><a class='dropdown-item external ' href='../../../../../'>Portal Cliente</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class='nav-link external text-white fs-5' href="../../../../../admin/correo/">Correo</a></li>
+                    <li class="nav-item"><a class='nav-link external text-white fs-5' href="../../../../../admin/perfil/">Perfil</a></li>
+                    <li class="nav-item current"><a class='nav-link external text-white fs-5' href="../../../../../admin/logout/">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+
+
+    <section id="slider" class="hero-area">
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image: url({% static 'img/2cfc7d74acdd98860b4115671b236904.jpg' %});">
+                    <div class="carousel-caption">
+                        {% block contenido %}
+                        {% endblock  %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.singlePageNav.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        {% if Alerta %}
+            alert("{{Alerta}}")
+        {% endif %}
+
+
+
+        var usuarioAutentificado = localStorage.getItem("usuarioAutentificado");
+        usuarioAutentificado = JSON.parse(usuarioAutentificado);
+        document.getElementById("userName").textContent = usuarioAutentificado.nombre;
+        $('.modal').on('shown.bs.modal', function() {
+            $('.modal-backdrop').css('z-index', '1040');
+        });
+    
+    </script>
+</body>
+</html>

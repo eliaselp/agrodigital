@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="{% static 'css/stilo2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/cliente/icons/favicon.png' %}">
+</head>
+<body>
+    <style>
+      .chat{ backgroup: linearGradient(135deg, #e6f2ff 0%, #cce0ff 100%);
+        padding:20px;
+        border-radius: 15px;
+        box-shadow: opx 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+        margin: 10px;
+} 
+    </style>
+    <img src="{% static 'img/img3.jpg' %}" id="background-imag">
+    <header>
+        <nav style="width: 300px;">
+            {% if Alerta %}
+                <div class="alert alert-danger alert-custom" sty role="alert" style="animation: fadeOut 10s forwards; width: 100%;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="red" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                    </svg> 
+                    "{{Alerta}}" 
+                </div> 
+            {% endif %} 
+            <style>
+                @keyframes fadeOut {
+                    0% { opacity: 1; } 
+                    100% { opacity: 0; display: none; } 
+                } 
+                .alert-custom { 
+                    width:5%; 
+                } 
+            </style>
+        </nav>
+    </header>
+
+    
+
+    <form action="../../../../admin/mercancias/agregar/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Añadir</h1>
+        <label for="username">Nombre del Producto:</label>
+        <input type="text" name="nombre" value="{{ret.nombre}}">
+        <label for="nombrev">Tipo:</label>
+        <select name="categoria" required>
+            <option value="" selected>Seleccione una categoría</option>
+            <option value="Verdura">Verdura</option>
+            <option value="Hortaliza">Hortaliza</option>
+            <option value="Legumbre">Legumbre</option>
+            <option value="Cereal">Cereal</option>
+            <option value="Frutas">Frutas</option>
+            <option value="Sazones">Sazones</option>
+            <option value="Lacteos">Lácteos</option>
+            <option value="Carnicos">Cárnicos</option>
+        </select>
+        <label for="valor">Cantidad:</label>
+        <input type="number" name="cantidad" required value="{{ret.cantidad}}">
+        <label for="precio">Precio:</label>
+        <input type="number" name="precio" required value="{{ret.precio}}">
+        <div class="input-group mt-2">
+            <label class="input-group-text" for="inputGroupFile01">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16">
+                    <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4z"/>
+                    <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5m0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+                </svg>
+            </label>
+            <input required name="imagen_producto" type="file" class="form-control" id="inputGroupFile01" accept="image/*" aria-describedby="inputGroupFileAddon01" aria-label="Upload">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100px;margin:5px" >Aceptar</button>
+        <a type="button" href="../../../../admin/mercancias/" class="btn btn-primary" style="width: 100px;">Cancelar</a>
+    </form>
+    <script>
+        
+        
+    </script>
+</body>
+</html>
