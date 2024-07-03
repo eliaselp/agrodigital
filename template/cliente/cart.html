@@ -1,0 +1,140 @@
+{% extends "cliente/base.html" %}
+{% load static %}
+
+{% block contenido %}
+<main class="main cart">
+    <div class="page-content pt-7 pb-10">
+
+        <div class="container mt-7 mb-2">
+            <div class="row">
+                <div class="col-lg-8 col-md-12 pr-lg-4">
+                    {% if not carrito %}
+                    <div class="w-100 my-5">
+                        <h3 class="title title-center my-5">No ha seleccionado
+                            ningun producto</h3>
+                    </div>
+                    {% else %}
+                    <div class="table-responsive">
+                        <table class="shop-table cart-table py-4">
+                            <thead>
+                                <tr>
+                                    <th class="px-4"><span>Producto</span></th>
+                                    <th class="px-4"></th>
+                                    <th class="px-4"><span>Precio</span></th>
+                                    <th
+                                        class="px-4"><span>Disponibilidad</span></th>
+                                    <th class="px-4"><span>Cantidad</span></th>
+                                    <th class="px-4"><span>Monto
+                                            Total</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for prc in carrito %}
+                                <tr>
+                                    <td class="product-thumbnail px-4 py-4">
+                                        <figure>
+                                            <a
+                                                href="product-simple.html">
+                                                <img
+                                                    src="{{prc.carrito.productoid.urlimagen}}"
+                                                    width="100"
+                                                    height="100"
+                                                    alt="product">
+                                            </a>
+                                        </figure>
+                                    </td>
+                                    <td
+                                        class="product-name px-4 py-4">
+                                        <div
+                                            class="product-name-section">
+                                            <a>{{prc.carrito.productoid.nombre}}</a>
+                                        </div>
+                                    </td>
+                                    <td
+                                        class="product-subtotal px-4 py-4">
+                                        <span
+                                            class="amount">${{prc.carrito.productoid.precio}}</span>
+                                    </td>
+                                    <td
+                                        class="product-name px-4 py-4">
+                                        <div
+                                            class="product-name-section">
+                                            <a>1 -
+                                                {{prc.carrito.productoid.cantidad}}</a>
+                                        </div>
+                                    </td>
+                                    <td class="product-quantity px-4 py-4">
+                                        <form
+                                            action="../../../../../../../carrito/{{prc.carrito.id}}"
+                                            method="POST">
+                                            <div class="input-group">
+                                                <div class="input-group mb-3">
+                                                    {% csrf_token %}
+                                                    <input type="number"
+                                                        name="cantidad"
+                                                        class="form-control"
+                                                        placeholder="1 - {{prc.carrito.productoid.cantidad}}"
+                                                        value={{prc.carrito.cantidad}}
+                                                        aria-label="Usuario"
+                                                        aria-describedby="button-addon2">
+                                                    <button
+                                                        class="btn btn-outline-light"
+                                                        type="submit">
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            width="34"
+                                                            height="34"
+                                                            fill="currentColor"
+                                                            class="bi bi-bag-plus"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                fill-rule="evenodd"
+                                                                d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5" />
+                                                            <path
+                                                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td
+                                        class="product-subtotal px-4 py-4">
+                                        <span
+                                            class="amount">${{prc.subtotal}}</span>
+                                    </td>
+                                    <td
+                                        class="product-close px-4 py-4">
+                                        <a class="product-remove"
+                                            title="Remove this product"
+                                            href="../../../../../eliminar_carrito/{{prc.carrito.id}}">
+                                            <i
+                                                class="fas fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="cart-actions mb-6 pt-4">
+                        <a href="../../../../../../../../efectuar_compra/"
+                            class="btn btn-dark btn-md btn-rounded btn-icon-left mr-4 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="34"
+                                height="34" fill="currentColor"
+                                class="bi bi-credit-card-fill mx-4"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3v5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1" />
+                            </svg>
+                            Realizar compra
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

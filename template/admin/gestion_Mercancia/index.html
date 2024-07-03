@@ -1,0 +1,157 @@
+{% extends "admin/index.html" %}
+{% load static %}
+{% block contenido %}
+<style>
+    table{
+        width: 100%;
+        max-width: 800px;
+        min-width: 500px;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+    th,td{
+        padding: 8px;
+        text-align: left;
+    }
+        .table-bordered th,
+    .table-bordered td {
+      border-color: #ccc; /* Cambiar el color de las líneas */
+      border-width: 2px; /* Cambiar el grosor de las líneas */
+      border-style: double; /* Cambiar el estilo de las líneas */
+    }
+    @media (max-width: 768px){
+        table{
+            font-size: 14px;
+        }
+        th,td{
+            padding: 5px;
+        }
+    }
+
+</style>
+<div class="sidebar" id="sidebar" method="post" enctype="text/plain">
+    <div class="slider-container" style="background-color:#ebbe83;">
+        <div class="slider-content" id="slider">
+            <div class="table-container  table table-bordered" style="background-color: #ebbe83;">
+                <table>
+                    <thead>
+                        <tr>
+                            <form action="../../../../admin/mercancias/" method="POST">
+                                {% csrf_token %}
+                                <div style="margin-top: 1%;">
+                                    <input type="text" name="busqueda" id="Buscar" placeholder="Buscar..."style="width:150px" >
+                                    <a type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                    </svg></a>
+                                </div>
+                            </form>
+                            <div style="margin-left: 20%;"> 
+                                <a type="button" class="btn btn-primary" href="../../../../../../../admin/mercancias/agregar/">Añadir</a>
+                            </div>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Fecha</th>
+                            <th>Foto</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pp in productos %}
+                            <tr>
+                                <td>{{pp.nombre}}</td>
+                                <td>{{pp.tipo}}</td>
+                                <td>{{pp.cantidad}}</td>
+                                <td>{{pp.precio}}</td>
+                                <td>{{pp.ultimo_update}}</td>
+                                <td>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16"
+                                    data-bs-toggle="modal" data-bs-target="#imagen{{pp.id}}">
+                                        <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                        <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1z"/>
+                                    </svg>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="imagen{{pp.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <img src="{{pp.urlimagen}}" class="mx-auto" style="width:320px">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img src="{% static 'img/Iconos/Modificar.ico' %}" alt="mofificar" class="icon"
+                                    data-bs-toggle="modal" data-bs-target="#modificarproducto{{pp.id}}">
+                                    <div class="modal fade" id="modificarproducto{{pp.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" style="color:black;" id="exampleModalLabel">Confirmación</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Está seguro que desea modificar el producto:  {{pp.nombre}}?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="../../../../admin/mercancias/modificar/{{pp.id}}">
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                                                    </form>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <img src="{% static 'img/Iconos/Recycle Bin Full.ico' %}" alt="Eliminar" class="icon"
+                                    data-bs-toggle="modal" data-bs-target="#eliminarproducto{{pp.id}}">
+                                    <div class="modal fade" id="eliminarproducto{{pp.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-dark" style="color:black;" id="exampleModalLabel">Confirmación</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Está seguro que desea eliminar el producto:  {{pp.nombre}}?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="../../../../admin/mercancias/eliminar/{{pp.id}}">
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                                                    </form>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% if not productos %}
+                            <tr>
+                                <td colspan="8">
+                                    No hay productos registrados
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <!-- Agrega más filas aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+    </div>
+</div>
+<script>
+    {% if Alerta %}
+        alert("{{Alerta}}")
+    {% endif %}      
+</script>
+{% endblock  %}

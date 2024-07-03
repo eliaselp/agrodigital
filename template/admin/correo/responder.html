@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandeja de Email</title>
+  <link rel="icon" type="image/png" href="{% static 'img/cliente/icons/favicon.png' %}">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    form {
+        margin-top: 5px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: 1000px;
+        position: relative;
+        left: 10px;
+    }
+  
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    #cancelar{
+     position: absolute;
+     bottom: 20px;
+     right: 20px;
+     padding: 12px 20px;
+     border-radius: 3px;
+     background-color: #4CAF50;
+     color: #fff;
+     cursor: pointer;
+     border: none;
+    }
+  </style>
+</head>
+<body>
+    <div>
+        <form action="../../../../../../../../admin/correo/responder/{{comentario.id}}/" method="POST">
+            <h1 >{{comentario.email}}</h1>
+            <label>Nombre: {{comentario.nombre}}</label><br>
+            <label>Comentario: {{comentario.comentario}}</label><br>
+            {% csrf_token %}
+            <label for="asunto">Asunto</label><br>
+            <input type="text" id="asunto" name="asunto" required><br><br>
+
+            <label for="mensaje">Mensaje:</label><br>
+            <textarea id="mensaje" name="mensaje" rows="4" cols="50" required placeholder="..."></textarea><br><br>
+
+            <input type="submit" value="Enviar">
+            <button id="cancelar" onclick="history.back()">Cancelar</button>
+        </form>
+    </div>
+</body>
+</html>

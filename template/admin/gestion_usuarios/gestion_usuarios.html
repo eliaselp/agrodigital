@@ -1,0 +1,134 @@
+{% extends "admin/index.html" %}
+{% load static %}
+{% block contenido %}
+<style>
+table{
+    width: 100%;
+    max-width: 800px;
+    min-width: 500px;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+th,td{
+    padding: 8px;
+    text-align: left;
+}
+    .table-bordered th,
+.table-bordered td {
+  border-color: #ccc; /* Cambiar el color de las líneas */
+  border-width: 2px; /* Cambiar el grosor de las líneas */
+  border-style: double; /* Cambiar el estilo de las líneas */
+}
+@media (max-width: 768px){
+    table{
+        font-size: 14px;
+    }
+    th,td{
+        padding: 5px;
+    }
+}
+</style>
+<div class="sidebar" id="sidebar" method="post" enctype="text/plain">
+    <div class="slider-container" style="background-color: #ebbe83;">
+        <div class="slider-content" id="slider">
+            <div class="table-container  table table-bordered"
+                style="background-color: #ebbe83;">
+                <table>
+                    <thead>
+                        <tr>
+                            <form class="" action="../../../../../../../admin/gestion_usuarios/" method="POST">
+                                {% csrf_token %}
+                                <div style="margin-top: 1%;" class="">
+                                    <input type="text" name="buscar" id="Buscar" placeholder="Buscar..." style="width:150px">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        width="16" height="16" fill="currentColor"
+                                        class="bi bi-search" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                    </svg>
+                                </div>
+                            </form>
+                            <div style="margin-left: 20%;">
+                                <a class="btn btn-primary" type="button" href="../../../../../../../admin/gestion_usuarios/agregar/">Añadir</a>
+                            </div>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Telefono</th>
+                            <th>Nombre de usuario</th>
+                            <th>Correo</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dep in dependientes %}
+                        <tr>
+                            <td>{{dep.nombre}}</td>
+                            <td>{{dep.apellidos}}</td>
+                            <td>{{dep.telefono}}</td>
+                            <td>{{dep.usuarioid.userid.username}}</td>
+                            <td>{{dep.usuarioid.userid.email}}</td>
+                            <td>
+                                <img
+                                    src="{% static 'img/Iconos/Recycle Bin Full.ico' %}"
+                                    alt="Eliminar" class="icon" id="{{dep.id}}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#eliminar_depentiente{{dep.id}}">
+                                <!-- Button trigger modal -->
+                                <!-- Modal -->
+                                <div class="modal fade"
+                                    id="eliminar_depentiente{{dep.id}}"
+                                    tabindex="-1"
+                                    aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-dark">
+                                                <h5 class="modal-title text-dark"
+                                                    id="exampleModalLabel">Confirmación</h5>
+                                                <button type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Esta seguro que desea eliminar
+                                                el empleado
+                                                {{dep.usuarioid.userid.username}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form
+                                                    action="../../../../admin/gestion_usuarios/eliminar/{{dep.id}}"
+                                                    method="GET">
+                                                    <button type="submit"
+                                                        class="btn btn-primary">Aceptar</button>
+                                                </form>
+                                                <button type="button"
+                                                    class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% if not dependientes %}
+                        <tr>
+                            <td colspan="4">
+                                <p>No hay Dependientes vinculados</p>
+                            </td>
+                            <tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+        function Inicio() {
+            window.location.replace("../../../../../../admin/gestion_usuarios/agregar/" );
+        }
+    </script>
+        {% endblock %}

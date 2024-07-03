@@ -1,0 +1,81 @@
+{% extends "cliente/base.html" %}
+{% load static %}
+{% block contenido %}
+    <main class="main">
+        <div class="page-header px-5 d-flex align-items-center" style="background-image: url({% static 'img/cliente/demos/demo1/slides/slide2.jpg' %}); background-size:cover; height:200px;">
+            <h1 class="page-title font-weight-bold text-capitalize ls-l text-white w-100 text-center">Contáctanos</h1>
+        </div>
+        <div class="page-content mt-10 pt-7">
+            <section class="contact-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6 ls-m mb-5 pb-5">
+                            <div class="grey-section d-flex align-items-center h-100">
+                                <div>
+                                    <h4 class="mb-2 text-capitalize">Nuestra dirección</h4>
+                                    <p>1600
+                                        Amphitheatre
+                                        Parkway<br>New
+                                        York WC1
+                                        1BA
+                                    </p>
+                                    <h4 class="mb-2 text-capitalize">Número de télefono</h4>
+                                    <p>
+                                        <a href="tel:+5352036098">+5352036098</a><br>
+                                        <a href="tel:+5358203729">+5358203729</a><br>
+                                        <a href="tel:+5356506252">+5356506252</a><br>
+                                    </p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-6 d-flex align-items-center mb-4 pb-5">
+                            <div class="w-100">
+                                <form class="pl-lg-2" action="../../../../../../../../contacto/" method="POST">
+                                    {% csrf_token %}
+                                    <h4 class="ls-m font-weight-bold">Escribe su quejas/sugerencias aquí</h4>
+                                    <p>Su
+                                        dirección de correo electrónico no será publicada. </p>
+
+                                    <div class="row mb-2">
+                                        <div class="col-12 mb-4">
+                                            <textarea class="form-control"
+                                                required
+                                                name="comentario" value=""
+                                                placeholder="Comentario" style="max-height:200px; min-height:200px" >
+                                            </textarea>
+                                        </div>
+                                        {% if not request.user.is_authenticated %}
+                                            <div class="col-md-6 mb-4">
+                                                <input class="form-control"
+                                                    name="nombre"
+                                                    type="text"
+                                                    placeholder="Nombre"
+                                                    required>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <input
+                                                    name="email"
+                                                    class="form-control"
+                                                    type="email"
+                                                    placeholder="Correo"
+                                                    required>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <button
+                                        class="btn btn-dark btn-rounded">
+                                        Publicar Comentario
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                                          </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock  %}

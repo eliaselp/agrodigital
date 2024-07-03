@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="{% static 'css/stilo2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/cliente/icons/favicon.png' %}">
+</head>
+<body>
+    <img src="{% static 'img/img3.jpg' %}" id="background-imag">
+    <header>
+        
+        <nav>
+            
+    </nav>
+    </header>
+
+    <form action="" method="POST" style="left: 15%;">
+        {% csrf_token %}
+        <h1 >Añadir</h1>
+        <label for="nombre">Nombres</label>
+        <input type="text" id="nombre" name="nombre" value="{{ret.nombre}}" required>
+        <label for="apellidos">Apellidos</label>
+        <input type="text" id="apellidos" name="apellidos" value="{{ret.apellidos}}" required>
+        
+        <label for="username">Nombre Usuario</label>
+        <input type="text" id="username" name="username" value="{{ret.username}}" required>
+        <label for="nombrev">Correo:</label>
+        <input type="email" id="email" name="email" value="{{ret.email}}" required>
+        <label for="telefono">Teléfono</label>
+        <input type="text" id="telefono" name="telefono" value="{{ret.telefono}}" required>
+        <label for="password1">Contraseña:</label>
+        <input type="password" id="password1" name="password1" value="{{ret.password1}}" required>
+        <label for="password2">Contraseña:</label>
+        <input type="password" id="password2" name="password2" value="{{ret.password2}}" required>
+        <button type="submit" onclick="validateCredentials()"  class="btn btn-primary" style="width: 100px;margin:5px">Añadir</button>
+        <a href="../../../../admin/gestion_usuarios/" class="btn btn-primary" style="width: 100px;">Cancelar</a>
+    
+    </form>
+    <div style="left:36px; width:30%"><div> {% if Alerta %}
+        <div class="alert alert-success alert-custom" sty role="alert" style="animation: fadeOut 10s forwards; width: 100%;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                 <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+        </svg> "{{Alerta}}" </div> {% endif %} <style> @keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; display: none; } } .alert-custom { width:5%; } </style></div></div>
+    <script>
+       
+    </script>
+        
+       
+</body>
+</html>

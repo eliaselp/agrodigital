@@ -1,0 +1,138 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link href="{% static 'css/bootstrap.min.css' %}"rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        :root {
+            --btn-size: .8rem;
+            --small-size: .75rem;
+        }
+
+        body {
+            background-color: #E4E8EB;
+        }
+
+        .bg {
+            background-color: #E4E8EB;
+        }
+
+        .login-card {
+            width: calc(100% - 13rem);
+        }
+
+        .login-card h1 {
+            color: #111727;
+        }
+
+        .login-card p {
+            /* color: #b0b4b6; */
+            color: #313131;
+            font-size: var(--small-size);
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: none;
+            border: var(--bs-border-width) solid var(--bs-border-color);
+        }
+
+        .login-card label {
+            font-size: var(--small-size);
+        }
+
+        form.form input {
+            font-size: var(--small-size);
+        }
+
+        form.form input::placeholder {
+            font-size: var(--small-size);
+        }
+
+        form.form button:nth-of-type(1) {
+            color: #fff;
+            background-color: #111727;
+            font-size: var(--btn-size);
+        }
+
+        form.form button:nth-last-child(1) {
+            color: #111727;
+            border: 1px solid #111727;
+            font-size: var(--btn-size);
+        }
+
+        form.form button:nth-last-child(2) {
+            color: #111727;
+            border: 1px solid #111727;
+            font-size: var(--btn-size);
+        }
+
+        .checkbox label {
+            font-size: var(--small-size);
+        }
+
+        .checkbox a {
+            font-size: var(--small-size);
+            color: #111727;
+        }
+
+        .signup {
+            font-size: var(--small-size);
+        }
+
+        .signup a {
+            color: #111727;
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                width: calc(100% - 2rem);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5 px-5 bg">
+        <div class="row justify-content-between bg-white rounded-start-4">
+            <div class="col-lg-7 d-flex justify-content-center align-items-center">
+                <div class="login-card py-lg-0 py-5">
+                    <h2 class="fw-semibold">Bienvenido a <br>Agro-Digital</h2>
+                    <p class="fw-light">Por favor verifique su correo y envie el tocken de confirmación</p>
+                    <form action="../../../../../../verificacion_correo/" class="form" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="mb-3 col-12">        
+                                <input type="text" class="form-control" name="tocken" placeholder="Introdice el tocken">
+                            </div>
+                        </div>                        
+                        <button type="submit" class="btn mt-4 w-100 text-light">Confirmar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-5 col-12 p-0">
+                <img src="{% static 'img/2cfc7d74acdd98860b4115671b236904.jpg' %}"
+                    alt="" class="img-fluid w-100" style="height: 100%;">
+            </div>
+        </div>
+    </div>
+    <script>
+        {% if Alerta %}
+            alert("{{Alerta}}")
+        {% endif %}
+    </script>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+</style>
+<link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %} ">
+</html>
